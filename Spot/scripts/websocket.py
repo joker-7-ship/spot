@@ -231,6 +231,22 @@ async def connect_to_websocket():
         order_subscribe_response = await websocket.recv()
         print("订单订阅响应:", order_subscribe_response)
 
+
+    # 优化订阅订单-
+        # 1、成交推送出現浮點數誤差；
+        # 2、order.subscribe (private) & deals.subscribe(public) 推送如果不帶入symbol參數推送所有symbol的成交更新信息
+
+
+
+
+
+
+
+
+
+
+
+
     # 取消订阅订单
         order_unsubscribe_request = {
             "id": 6,

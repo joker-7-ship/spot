@@ -64,13 +64,20 @@ async def connect_to_websocket():
             "id": 2
         }
         asyncio.create_task(subscribe_and_receive(websocket, kline_subscribe_request, "K线"))
-        # 深度推送
-        depth_subscribe_request = {
-            "method": "depth.subscribe",
-            "params": ["BTCUSDT", 5, "0.01"],
-            "id": 4
-        }
-        asyncio.create_task(subscribe_and_receive(websocket, depth_subscribe_request, "深度"))
+        # # 深度推送
+        # depth_subscribe_request = {
+        #     "method": "depth.subscribe",
+        #     "params": ["BTCUSDT", 5, "0.01"],
+        #     "id": 4
+        # }
+        # asyncio.create_task(subscribe_and_receive(websocket, depth_subscribe_request, "深度"))
+   # 深度推送优化：WSS: "depth.subscribe"（增加full book推送&訂閱深度）
+   #      1、params[3]，string，One of ['full','increment']，默认：'increment' (現有推送方式)，如果params[1] > 20, 僅能訂閱increment
+   #      2、params[4]，string，100ms,500ms,1000ms，默認 500ms
+
+
+
+
         # 市场状态推送
         state_subscribe_request = {
             "method": "state.subscribe",

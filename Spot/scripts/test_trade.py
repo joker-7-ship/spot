@@ -1,67 +1,92 @@
 import requests
-import pet_time_range(offset_start, offset_end):
-    server_time = get_server_time()
-    return server_time + offset_start, server_time + offset_end
-starytest
+import pytest
 import json
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../common')))
 from common.request_utils import post_request, get_request, get_server_time
-from data.trade_data import ACCESS,default,put_market,put_limit,order_cancel,order_pending,cancel_allorder,order_stop_limit,order_stop_market
+from data.trade_data import ACCESS, default, put_market,put_limit,order_cancel,order_pending,cancel_allorder,order_stop_limit,order_stop_market
 from common.request_utils import post_request, get_request, get_server_time
 
 @pytest.fixture
 def server_time():
     return get_server_time()
 
-def gt_time, end_time = get_time_range(-1000000, 3000000)
+def get_time_range(offset_start, offset_end):
+    server_time = get_server_time()
+    return server_time + offset_start, server_time + offset_end
+
+gt_time,  end_time = get_time_range(-1000000, 3000000)
 
 class TestBtcc:
-# 下限价单
-#     @pytest.mark.parametrize("data",put_limit)
-    def test_put_limit(self, server_time):
-        params = {
-                "access_id": "aaf75ccf-4014-4fc7-b2c1-21cf3a8d6728",
-                "tm": server_time,
-                "market": "BTCUSDT",
-                "side": 1,
-                "option": 0,
-                "amount": "1000",
-                "price": "20000",
-                "source": "U买B"
-            }
-        print("Params:", params)
-        response = post_request("/btcc_api_trade/order/limit", params)
-        print("Response:", response)
-        global cancel_orderid
-        cancel_orderid = response['result']['id']
-        assert response['result']['id'] is not None, "Error"
+    # 整合下单接口：POST /trade/v2/order （對標Binance: 整合limit, market, plan limit, plan market）
+
+
+
+
+
+
+    # 新增改单接口：POST /trade/order/amend-order (對標OKX: 新增改單功能; 可改價格和數量但是會影響搓合優先順序)
+
+
+    # 新增改单接口：POST /trade/order/amend-keepPriority (對標Binance: 新增改量功能; 只能往下改數量; 不影響搓合順序)
+
+
+
+
+
+
+
+
+
+
+
+
+# # 下限价单
+# #     @pytest.mark.parametrize("data",put_limit)
+#     def test_put_limit(self, server_time):
+#         params = {
+#                 "access_id": "aaf75ccf-4014-4fc7-b2c1-21cf3a8d6728",
+#                 "tm": server_time,
+#                 "market": "BTCUSDT",
+#                 "side": 1,
+#                 "option": 0,
+#                 "amount": "1000",
+#                 "price": "20000",
+#                 "source": "U买B"
+#             }
+#         print("Params:", params)
+#         response = post_request("/order/limit", params)
+#         print("Response:", response)
+#         global cancel_orderid
+#         cancel_orderid = response['result']
+#         print(cancel_orderid)
+#         assert response['result'] is  None, "Error"
 # 下市价单
 #     @pytest.mark.parametrize("data", put_market)
-    def test_put_market(self,server_time):
-        # params = {
-        #     "access_id": data["access_id"],
-        #     "tm": server_time,
-        #     "market": data["market"],
-        #     "side": data["side"],
-        #     "option": data["option"],
-        #     "amount": data["amount"],
-        #     "source": data["source"]
-        # }
-        params ={
-            "access_id": "aaf75ccf-4014-4fc7-b2c1-21cf3a8d6728",
-            "tm": server_time,
-            "market": "BTCUSDT",
-            "side": 1,
-            "amount": "1000",
-            "option": 0,
-            "source": "U买B"
-        }
-        print("Params:", params)
-        response = post_request("btcc_api_trade/order/market", params)
-        print("Response:", response)
-        assert response['result']['id'] is not None, "Error"
+#     def test_put_market(self,server_time):
+#         # params = {
+#         #     "access_id": data["access_id"],
+#         #     "tm": server_time,
+#         #     "market": data["market"],
+#         #     "side": data["side"],
+#         #     "option": data["option"],
+#         #     "amount": data["amount"],
+#         #     "source": data["source"]
+#         # }
+#         params ={
+#             "access_id": "aaf75ccf-4014-4fc7-b2c1-21cf3a8d6728",
+#             "tm": server_time,
+#             "market": "BTCUSDT",
+#             "side": 1,
+#             "amount": "1000",
+#             "option": 0,
+#             "source": "U买B"
+#         }
+#         print("Params:", params)
+#         response = post_request("/order/market", params)
+#         print("Response:", response)
+#         assert response['result']['id'] is not None, "Error"
 # # 撤单
 #     @pytest.mark.parametrize("data", order_cancel)
 #     def test_order_cancel(self, server_time, data):

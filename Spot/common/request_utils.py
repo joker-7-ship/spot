@@ -12,17 +12,12 @@ import requests
 import time
 from common.config import ACCESS_ID, SECRET_KEY, BASE_URL
 
-# # 获取服务器时间戳
-# def get_server_time():
-#     response = requests.get(f"{BASE_URL}/btcc_trade/time", verify=False)
-#     if response.status_code == 200:
-#         return response.json()["data"]
-#     else:
-#         raise Exception("无法获取服务器时间")
+
 
 # 获取服务器时间戳
 def get_server_time():
-    response = requests.get("https://spot_api.btcccdn.com:9910/btcc_api_trade/time", verify=False)
+    response = requests.get("https://spot_api.cryptouat.com:9910/btcc_api_trade/time", verify=False)
+    print(response)
     if response.status_code == 200:
         return response.json()["data"]
     else:
@@ -36,6 +31,10 @@ def generate_signature(params):
     md5_signature = hashlib.md5(sorted_param_str.encode('utf-8')).hexdigest()
     print("Sign:", sorted_param_str)
     return md5_signature
+
+
+
+
 
 # headers生成
 def prepare_request(params):

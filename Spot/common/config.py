@@ -5,8 +5,10 @@
 # BASE_URL = "https://spot.cryptouat.com:9990/btcc_trade"
 # WSS_URL = "wss://spot_api.cryptouat.com:8700"
 #PRD
-BASE_URL = "https://spot_api.btcccdn.com:9910/btcc_api_trade"
-WSS_URL = "wss://spot_api.btcccdn.com:8700"
+# BASE_URL = "https://spot_api.btcccdn.com:9910/btcc_api_trade"
+BASE_URL = "https://spot_api.cryptouat.com:9910/btcc_api_trade"
+WSS_URL = "wss://spot_api.cryptouat.com:8700"
+# WSS_URL = "wss://spot_api.btcccdn.com:8700"
 
 #可用
 ACCESS_ID = "aaf75ccf-4014-4fc7-b2c1-21cf3a8d6728"
