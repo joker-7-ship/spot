@@ -11,8 +11,10 @@ WSS_URL = "wss://spot_api.cryptouat.com:8700"
 # WSS_URL = "wss://spot_api.btcccdn.com:8700"
 
 #可用
-ACCESS_ID = "aaf75ccf-4014-4fc7-b2c1-21cf3a8d6728"
-SECRET_KEY = "05581813-5876-4027-b7f9-619c3c385cea"
+ACCESS_ID = "8f8b43f3-d8c3-4210-98dc-11bb464dcc68"
+SECRET_KEY = "b019b736-b956-4ec0-9464-6d8b8653d4d5"
+# ACCESS_ID = "aaf75ccf-4014-4fc7-b2c1-21cf3a8d6728"
+# SECRET_KEY = "05581813-5876-4027-b7f9-619c3c385cea"
 
 # #合约只读
 # ACCESS_ID = "86fe807c-72b9-4684-a653-0752dbd510cb"

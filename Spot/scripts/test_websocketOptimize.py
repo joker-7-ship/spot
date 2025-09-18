@@ -57,37 +57,7 @@ async def connect_to_websocket():
         if "auth fail" in json.loads(auth_response):
             print("鉴权失败，退出连接")
             return
-        # K线推送
-        kline_subscribe_request = {
-            "method": "kline.subscribe",
-            "params": ["BTCUSDT", 1],
-            "id": 2
-        }
-        asyncio.create_task(subscribe_and_receive(websocket, kline_subscribe_request, "K线"))
-        # # 深度推送
-        depth_subscribe_request = {
-            "method": "depth.subscribe",
-            "params": ["BTCUSDT", 5, "0.01"],
-            "id": 4
-        }
-        asyncio.create_task(subscribe_and_receive(websocket, depth_subscribe_request, "深度"))
 
-
-
-   # 深度推送优化：WSS: "depth.subscribe"（增加full book推送&訂閱深度）
-   #      1、params[3]，string，One of ['full','increment']，默认：'increment' (現有推送方式)，如果params[1] > 20, 僅能訂閱increment
-   #      2、params[4]，string，100ms,500ms,1000ms，默認 500ms
-
-
-
-
-        # 市场状态推送
-        state_subscribe_request = {
-            "method": "state.subscribe",
-            "params": ["BTCUSDT", 86400],
-            "id": 5
-        }
-        asyncio.create_task(subscribe_and_receive(websocket, state_subscribe_request, "市场状态"))
         # 成交推送
         deals_subscribe_request = {
             "method": "deals.subscribe",
@@ -102,13 +72,14 @@ async def connect_to_websocket():
             "id": 7
         }
         asyncio.create_task(subscribe_and_receive(websocket, order_subscribe_request, "订单"))
-        # 资产推送
-        asset_subscribe_request = {
-            "method": "asset.subscribe",
-            "params": [],
-            "id": 8
+        # 深度推送
+        depth_subscribe_request = {
+            "method": "depth.subscribe",
+            "params": ["BTCUSDT", 5, "0.01"],
+            "id": 4
         }
-        asyncio.create_task(subscribe_and_receive(websocket, asset_subscribe_request, "资产"))
-        await asyncio.Future()
+        asyncio.create_task(subscribe_and_receive(websocket, depth_subscribe_request, "深度"))
+
+
 if __name__ == "__main__":
     asyncio.run(connect_to_websocket())
