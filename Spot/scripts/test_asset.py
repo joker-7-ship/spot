@@ -15,17 +15,17 @@ start_time, end_time = get_time_range(-1000000, 3000000)
 
 class TestBtcc:
     @classmethod
-# # 查询用户资产
-#     @pytest.mark.parametrize("data", asset_query)
-#     def test_asset_query(self, server_time, data):
-#         params = {
-#             "access_id": data["access_id"],
-#             "tm": server_time,
-#         }
-#         print("params:", params)
-#         response = get_request("/asset/query", params)
-#         print("Response:", response)
-#         assert response['error'] is None, "Error should be None"
+# 查询用户资产
+    @pytest.mark.parametrize("data", asset_query)
+    def test_asset_query(self, server_time, data):
+        params = {
+            "access_id": data["access_id"],
+            "tm": server_time,
+        }
+        print("params:", params)
+        response = get_request("/asset/query", params)
+        print("Response:", response)
+        assert response['error'] is None, "Error should be None"
 # # 查询用户资金流水
 #     @pytest.mark.parametrize("data", asset_history)
 #     def test_asset_history(self, server_time, data):
@@ -54,59 +54,59 @@ class TestBtcc:
 #         print("Response:", response)
 #         assert response['result'].get('name') is not None, "name should not be None"
 
-# 查询单个交易对信息
-    def test_market_detail(self):
-        params = {"market":"FDDUSDT"}
-        response = get_request("/market/detail", params)
-        print("Response:", response)
-        assert response['result'].get('name') is not None, "name should not be None"
-
-# 查询k线
-    @pytest.mark.parametrize("data", market_kline)
-    def test_market_kline(self,data):
-        params={
-            "market":data["market"],
-            "start_time": start_time,
-            "end_time": end_time,
-            "interval": data["interval"],
-        }
-        print("Params:", params)
-        response = get_request("/market/kline", params)
-        print("Response:", response)
-        assert response['error'] is None, "Error should be None"
-# # 查询深度
-#     @pytest.mark.parametrize("data", market_depth)
-#     def test_market_depth(self,data):
+# # 查询单个交易对信息
+#     def test_market_detail(self):
+#         params = {"market":"FDDUSDT"}
+#         response = get_request("/market/detail", params)
+#         print("Response:", response)
+#         assert response['result'].get('name') is not None, "name should not be None"
+#
+# # 查询k线
+#     @pytest.mark.parametrize("data", market_kline)
+#     def test_market_kline(self,data):
 #         params={
 #             "market":data["market"],
-#             "limit": data["limit"],
-#             "merge": data["merge"],
+#             "start_time": start_time,
+#             "end_time": end_time,
+#             "interval": data["interval"],
+#         }
+#         print("Params:", params)
+#         response = get_request("/market/kline", params)
+#         print("Response:", response)
+#         assert response['error'] is None, "Error should be None"
+# # # 查询深度
+# #     @pytest.mark.parametrize("data", market_depth)
+# #     def test_market_depth(self,data):
+# #         params={
+# #             "market":data["market"],
+# #             "limit": data["limit"],
+# #             "merge": data["merge"],
+# #         }
+# #         print("Params:", params)
+# #         response = get_request("/market/depth", params)
+# #         print("Response:", response)
+# #         assert response['result'].get('time') is not None, "Time should not be None"
+#
+#     # 查询深度
+#     def test_market_depth(self,):
+#         params = {
+#             "market": "1000CAWUSDT",
+#             "limit": "50",
+#             "merge": "0.00000001"
 #         }
 #         print("Params:", params)
 #         response = get_request("/market/depth", params)
 #         print("Response:", response)
 #         assert response['result'].get('time') is not None, "Time should not be None"
-
-    # 查询深度
-    def test_market_depth(self,):
-        params = {
-            "market": "1000CAWUSDT",
-            "limit": "50",
-            "merge": "0.00000001"
-        }
-        print("Params:", params)
-        response = get_request("/market/depth", params)
-        print("Response:", response)
-        assert response['result'].get('time') is not None, "Time should not be None"
-
-# 查询最新价
-    @pytest.mark.parametrize("data", market_detail)
-    def test_market_last(self,data):
-        params={"market":data["market"]}
-        print("Params:", params)
-        response = get_request("/market/last", params)
-        print("Response:", response)
-        assert response['error'] is None, "Error should be None"
+#
+# # 查询最新价
+#     @pytest.mark.parametrize("data", market_detail)
+#     def test_market_last(self,data):
+#         params={"market":data["market"]}
+#         print("Params:", params)
+#         response = get_request("/market/last", params)
+#         print("Response:", response)
+#         assert response['error'] is None, "Error should be None"
 # pytest.main(['--report=_report.html',
 #              '--title=BtccSpotApiTest',
 #              '--desc=基于Pytest的API自动化脚本',

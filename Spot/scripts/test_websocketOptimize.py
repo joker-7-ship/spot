@@ -58,27 +58,28 @@ async def connect_to_websocket():
             print("鉴权失败，退出连接")
             return
 
-        # 成交推送
-        deals_subscribe_request = {
-            "method": "deals.subscribe",
-            "params": ["BTCUSDT", "ETHUSDT"],
-            "id": 6
-        }
-        asyncio.create_task(subscribe_and_receive(websocket, deals_subscribe_request, "成交"))
-        # 订单推送
-        order_subscribe_request = {
-            "method": "order.subscribe",
-            "params": [],
-            "id": 7
-        }
-        asyncio.create_task(subscribe_and_receive(websocket, order_subscribe_request, "订单"))
+        # # 成交推送
+        # deals_subscribe_request = {
+        #     "method": "deals.subscribe",
+        #     "params": ["BTCUSDT", "ETHUSDT"],
+        #     "id": 6
+        # }
+        # asyncio.create_task(subscribe_and_receive(websocket, deals_subscribe_request, "成交"))
+        # # 订单推送
+        # order_subscribe_request = {
+        #     "method": "order.subscribe",
+        #     "params": [],
+        #     "id": 7
+        # }
+        # asyncio.create_task(subscribe_and_receive(websocket, order_subscribe_request, "订单"))
         # 深度推送
         depth_subscribe_request = {
             "method": "depth.subscribe",
-            "params": ["BTCUSDT", 5, "0.01"],
+            "params": ["BTCUSDT", 5, "0.01","full",500],
             "id": 4
         }
         asyncio.create_task(subscribe_and_receive(websocket, depth_subscribe_request, "深度"))
+        await asyncio.Future()
 
 
 if __name__ == "__main__":

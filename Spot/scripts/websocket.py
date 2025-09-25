@@ -222,6 +222,20 @@ async def connect_to_websocket():
         print("用户计划委托单查询响应:", order_account_query_stop_response)
 
     # 订阅订单
+    #     order_subscribe_request = {
+    #         "method": "order.subscribe",
+    #         "params": [],
+    #         "id": 3
+    #     }
+    #     await websocket.send(json.dumps(order_subscribe_request))
+    #     order_subscribe_response = await websocket.recv()
+    #     print("订单订阅响应:", order_subscribe_response)
+
+
+    # 优化订阅订单-
+        # 1、成交推送出現浮點數誤差；
+        # 2、order.subscribe (private) & deals.subscribe(public) 推送如果不帶入symbol參數推送所有symbol的成交更新信息
+
         order_subscribe_request = {
             "method": "order.subscribe",
             "params": [],
@@ -232,9 +246,6 @@ async def connect_to_websocket():
         print("订单订阅响应:", order_subscribe_response)
 
 
-    # 优化订阅订单-
-        # 1、成交推送出現浮點數誤差；
-        # 2、order.subscribe (private) & deals.subscribe(public) 推送如果不帶入symbol參數推送所有symbol的成交更新信息
 
 
 
@@ -242,50 +253,47 @@ async def connect_to_websocket():
 
 
 
-
-
-
-
-
-    # 取消订阅订单
-        order_unsubscribe_request = {
-            "id": 6,
-            "method": "order.unsubscribe",
-            "params": []
-        }
-        await websocket.send(json.dumps(order_unsubscribe_request))
-        order_unsubscribe_response = await websocket.recv()
-        print("订单取消订阅响应:", order_unsubscribe_response)
-
-    # 查询资产
-        asset_query_request = {
-            "id": 4,
-            "method": "asset.query",
-            "params": []
-        }
-        await websocket.send(json.dumps(asset_query_request))
-        asset_query_response = await websocket.recv()
-        print("资产查询响应:", asset_query_response)
-
-    # 订阅资产
-        asset_subscribe_request = {
-            "id": 5,
-            "method": "asset.subscribe",
-            "params": []
-        }
-        await websocket.send(json.dumps(asset_subscribe_request))
-        asset_subscribe_response = await websocket.recv()
-        print("资产订阅响应:", asset_subscribe_response)
-
-    # 取消订阅资产
-        asset_unsubscribe_request = {
-            "id": 7,
-            "method": "asset.unsubscribe",
-            "params": []
-        }
-        await websocket.send(json.dumps(asset_unsubscribe_request))
-        asset_unsubscribe_response = await websocket.recv()
-        print("资产取消订阅响应:", asset_unsubscribe_response)
+    #
+    #
+    # # 取消订阅订单
+    #     order_unsubscribe_request = {
+    #         "id": 6,
+    #         "method": "order.unsubscribe",
+    #         "params": []
+    #     }
+    #     await websocket.send(json.dumps(order_unsubscribe_request))
+    #     order_unsubscribe_response = await websocket.recv()
+    #     print("订单取消订阅响应:", order_unsubscribe_response)
+    #
+    # # 查询资产
+    #     asset_query_request = {
+    #         "id": 4,
+    #         "method": "asset.query",
+    #         "params": []
+    #     }
+    #     await websocket.send(json.dumps(asset_query_request))
+    #     asset_query_response = await websocket.recv()
+    #     print("资产查询响应:", asset_query_response)
+    #
+    # # 订阅资产
+    #     asset_subscribe_request = {
+    #         "id": 5,
+    #         "method": "asset.subscribe",
+    #         "params": []
+    #     }
+    #     await websocket.send(json.dumps(asset_subscribe_request))
+    #     asset_subscribe_response = await websocket.recv()
+    #     print("资产订阅响应:", asset_subscribe_response)
+    #
+    # # 取消订阅资产
+    #     asset_unsubscribe_request = {
+    #         "id": 7,
+    #         "method": "asset.unsubscribe",
+    #         "params": []
+    #     }
+    #     await websocket.send(json.dumps(asset_unsubscribe_request))
+    #     asset_unsubscribe_response = await websocket.recv()
+    #     print("资产取消订阅响应:", asset_unsubscribe_response)
 
 # 运行 WebSocket 客户端
 asyncio.run(connect_to_websocket())
